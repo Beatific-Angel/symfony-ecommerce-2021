@@ -1,0 +1,67 @@
+<img src="{{ asset('images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+<span class="header-icons-noti cartTotalProducts">
+    {% if cart.cartProducts is defined %}
+        {{ cart.cartProducts|length }}
+    {% else %}
+        0
+    {% endif %}
+</span>
+<!-- Header cart noti -->
+<div class="header-cart header-dropdown">
+    <ul class="header-cart-wrapitem cartAllProducts">
+        {% if cart.cartProducts is defined %}
+            {% for cartProduct in cart.cartProducts %}
+                {% set product = cartProduct.product %}
+                <li class="header-cart-item">
+                    <div class="header-cart-item-img">
+                        <img src="{{ product.pictureUrl }}" alt="{{ "Photo de " ~ product.name }}">
+                    </div>
+
+                    <div class="header-cart-item-txt">
+                        <a href="{{ path('product', {'slug': product.slug}) }}" class="header-cart-item-name">
+                            {{ product.name }}
+                        </a>
+
+                        <span class="header-cart-item-info">
+                            {{ cartProduct.quantity }} x {{ price_format(product.price) }}
+                        </span>
+                    </div>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+
+    <div class="header-cart-total">
+        Total:
+        <span class="cartTotal">
+            {% if cart.total is defined %}
+                {{ price_format(cart.total) }}
+            {% else %}
+                {{ price_format(0) }}
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="header-cart-buttons">
+        <div class="header-cart-wrapbtn">
+            <!-- Button -->
+            <a href="{{ path('cart') }}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                View Cart
+            </a>
+        </div>
+
+        <div class="header-cart-wrapbtn">
+            <!-- Button -->
+            <a href="{{ path('checkout_payment') }}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                Check Out
+            </a>
+        </div>
+
+        <div class="header-cart-wrapbtn">
+            <!-- Button -->
+            <button class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4 reset-cart">
+                Reset Cart
+            </button>
+        </div>
+    </div>
+</div>

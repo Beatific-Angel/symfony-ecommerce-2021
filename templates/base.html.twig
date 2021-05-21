@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>E-commerce - {% block title %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        {% include 'partials/stylesheets.html.twig' %}
+    </head>
+    <body class="animsition">
+        {% include 'partials/header.html.twig' %}
+        {% block body %}{% endblock %}
+        {% include 'partials/footer.html.twig' %}
+        {% block javascripts %}{% endblock %}
+        <script>
+           $('.reset-cart').click(function(){
+               $.get("{{ path('cart_reset') }}", function resetCart(data){
+                   if (data.status === "done") {
+                       $('.cartTotal').html("0.00 €");
+                       $('.cartTotalProducts').html(0);
+                       $('.cartAllProducts').html("");
+                   } else {
+                       resetCart(data);
+                   }
+               });
+           });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All collections{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% for collection in collections %}
+            <div class="col-md-6 col-sm-12">
+                <a href="{{ path('collection', {'slug': collection.slug}) }}">
+                    <img src="{{ collection.pictureUrl }}" alt="{{ "Photo de " ~ collection.name }}" style="width: 300px; height: auto;">
+                    <p>{{ "Nom : " ~ collection.name }}</p>
+                </a>
+                <div class="row">
+                    <h2 class="col-12 my-2">Produits issus de cette collection :</h2>
+                    {% for product in collection.products %}
+                        <div class="col-md-4 col-sm-6">
+                            <a href="{{ path('product', {'slug': product.slug}) }}">
+                                <img src="{{ product.pictureUrl }}" alt="{{ "Photo de " ~ product.name }}" style="width: 100px; height: auto;" />
+                                <p>{{ product.name ~ " (" ~ price_format(product.price) ~ ")" }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="ml-auto mr-4 mt-3">
+            {% for i in range(1, maxPagination) %}
+                <a href="{{ path('collections', {'offset': i}) }}">{{ i }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
