@@ -9,7 +9,6 @@
 
 ## Install the project
 
-- `git clone https://github.com/kevinhuang78/iim-2019-symfony-ecommerce.git`
 - `composer install`
 
 ## Configure
