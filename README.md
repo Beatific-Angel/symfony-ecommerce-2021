@@ -1,4 +1,5 @@
-# IIM A4 IWM Symfony 4 E-Commerce (Class)
+symfony-ecommerce-2021
+
 
 ## Dependencies
 
